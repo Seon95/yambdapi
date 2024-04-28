@@ -3,43 +3,28 @@
 namespace App\Entity;
 
 use App\Repository\MovieRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=MovieRepository::class)
- */
+#[ORM\Entity(repositoryClass: MovieRepository::class)]
 class Movie
 {
-    /**
-     * @ORM\Id()
-     *
-     * @ORM\GeneratedValue()
-     *
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $director;
+    #[ORM\Column(length: 255)]
+    private ?string $director = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $ReleaseYear;
+    #[ORM\Column]
+    private ?int $releaseYear = null;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    // Getters and setters
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function getId(): ?int
     {
@@ -51,7 +36,7 @@ class Movie
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): static
     {
         $this->title = $title;
 
@@ -63,21 +48,21 @@ class Movie
         return $this->director;
     }
 
-    public function setDirector(string $director): self
+    public function setDirector(string $director): static
     {
         $this->director = $director;
 
         return $this;
     }
 
-    public function getYearOfRelease(): ?int
+    public function getReleaseYear(): ?int
     {
-        return $this->ReleaseYear;
+        return $this->releaseYear;
     }
 
-    public function setYearOfRelease(int $ReleaseYear): self
+    public function setReleaseYear(int $releaseYear): static
     {
-        $this->ReleaseYear = $ReleaseYear;
+        $this->releaseYear = $releaseYear;
 
         return $this;
     }
@@ -87,7 +72,7 @@ class Movie
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
